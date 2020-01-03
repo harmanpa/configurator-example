@@ -41,6 +41,8 @@ public class ConfiguredPart extends AbstractDocumentElement {
     private String instanceId;
     @JsonProperty
     private String partId;
+    @JsonProperty
+    private String name;
 
     public String getInstanceId() {
         return instanceId;
@@ -72,6 +74,14 @@ public class ConfiguredPart extends AbstractDocumentElement {
 
     public void setPartId(String partId) {
         this.partId = partId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

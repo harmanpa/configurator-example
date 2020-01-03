@@ -73,13 +73,13 @@ public class AssembliesService {
             if (!instance.getSuppressed()) {
                 switch (instance.getType()) {
                     case "Part":
-                        ConfiguredPart part = makePart(assemblyDefinition, instance.getConfiguration(), instance.getPartId(), instance.getDocument(), instance.getId());
+                        ConfiguredPart part = makePart(assemblyDefinition, instance.getConfiguration(), instance.getPartId(), instance.getName(), instance.getDocument(), instance.getId());
                         if (part != null) {
                             configuredAssembly.getParts().add(part);
                         }
                         break;
                     case "Assembly":
-                        ConfiguredAssembly.SubAssembly subassembly = makeSubassembly(assemblyDefinition, instance.getDocument(), instance.getId());
+                        ConfiguredAssembly.SubAssembly subassembly = makeSubassembly(assemblyDefinition, instance.getName(), instance.getDocument(), instance.getId());
                         if (subassembly != null) {
                             configuredAssembly.getSubAssemblies().add(subassembly);
                         }
@@ -92,15 +92,21 @@ public class AssembliesService {
         return configuredAssembly;
     }
 
-    private AssembliesGetAssemblyDefinitionResponseRootAssemblyOccurrences getOccurrence(AssembliesGetAssemblyDefinitionResponse assemblyDefinition, String... path) {
-        return Stream.of(assemblyDefinition.getRootAssembly().getOccurrences()).filter((occ) -> Arrays.equals(path, occ.getPath())).findFirst().get();
+    private AssembliesGetAssemblyDefinitionResponseRootAssemblyOccurrences getOccurrence(AssembliesGetAssemblyDefinitionResponse assemblyDefinition, String... path) throws OnshapeException {
+        return Stream.of(assemblyDefinition.getRootAssembly().getOccurrences())
+                .filter((occ) -> Arrays.equals(path, occ.getPath()))
+                .findFirst()
+                .orElseThrow(() -> new OnshapeException("Could not find occurance for path " + Arrays.toString(path)));
     }
 
-    private AssembliesGetAssemblyDefinitionResponseSubAssemblies getSubAssemblyDefinition(AssembliesGetAssemblyDefinitionResponse assemblyDefinition, OnshapeDocument target) {
-        return Stream.of(assemblyDefinition.getSubAssemblies()).filter((subass) -> subass.getDocument().equals(target)).findFirst().get();
+    private AssembliesGetAssemblyDefinitionResponseSubAssemblies getSubAssemblyDefinition(AssembliesGetAssemblyDefinitionResponse assemblyDefinition, OnshapeDocument target) throws OnshapeException {
+        return Stream.of(assemblyDefinition.getSubAssemblies())
+                .filter((subass) -> subass.getDocument().equals(target))
+                .findFirst()
+                .orElseThrow(() -> new OnshapeException("Could not find subassembly from document " + target));
     }
 
-    private ConfiguredPart makePart(AssembliesGetAssemblyDefinitionResponse assemblyDefinition, String configuration, String partId, OnshapeDocument instanceDocument, String... path) {
+    private ConfiguredPart makePart(AssembliesGetAssemblyDefinitionResponse assemblyDefinition, String configuration, String partId, String name, OnshapeDocument instanceDocument, String... path) throws OnshapeException {
         AssembliesGetAssemblyDefinitionResponseRootAssemblyOccurrences occurrence = getOccurrence(assemblyDefinition, path);
         if (!occurrence.getHidden()) {
             ConfiguredPart part = new ConfiguredPart();
@@ -109,17 +115,19 @@ public class AssembliesService {
             part.setTransform(occurrence.getTransform());
             part.setFromDocument(instanceDocument);
             part.setPartId(partId);
+            part.setName(name);
             return part;
         }
         return null;
     }
 
-    private ConfiguredAssembly.SubAssembly makeSubassembly(AssembliesGetAssemblyDefinitionResponse assemblyDefinition, OnshapeDocument instanceDocument, String... path) {
+    private ConfiguredAssembly.SubAssembly makeSubassembly(AssembliesGetAssemblyDefinitionResponse assemblyDefinition, String name, OnshapeDocument instanceDocument, String... path) throws OnshapeException {
         AssembliesGetAssemblyDefinitionResponseRootAssemblyOccurrences occurrence = getOccurrence(assemblyDefinition, path);
         if (!occurrence.getHidden()) {
             ConfiguredAssembly.SubAssembly subassembly = new ConfiguredAssembly.SubAssembly();
             subassembly.setTransform(occurrence.getTransform());
             subassembly.setInstanceId(path[path.length - 1]);
+            subassembly.setName(name);
             AssembliesGetAssemblyDefinitionResponseSubAssemblies definition = getSubAssemblyDefinition(assemblyDefinition, instanceDocument);
             for (AssembliesGetAssemblyDefinitionResponseSubAssembliesInstances instance : definition.getInstances()) {
                 if (!instance.getSuppressed()) {
@@ -128,13 +136,13 @@ public class AssembliesService {
                     instancePath[instancePath.length - 1] = instance.getId();
                     switch (instance.getType()) {
                         case "Part":
-                            ConfiguredPart part = makePart(assemblyDefinition, instance.getConfiguration(), instance.getPartId(), instance.getDocument(), instancePath);
+                            ConfiguredPart part = makePart(assemblyDefinition, instance.getConfiguration(), instance.getPartId(), instance.getName(), instance.getDocument(), instancePath);
                             if (part != null) {
                                 subassembly.getParts().add(part);
                             }
                             break;
                         case "Assembly":
-                            ConfiguredAssembly.SubAssembly subsubassembly = makeSubassembly(assemblyDefinition, instanceDocument, instancePath);
+                            ConfiguredAssembly.SubAssembly subsubassembly = makeSubassembly(assemblyDefinition, instance.getName(), instance.getDocument(), instancePath);
                             if (subsubassembly != null) {
                                 subassembly.getSubAssemblies().add(subsubassembly);
                             }

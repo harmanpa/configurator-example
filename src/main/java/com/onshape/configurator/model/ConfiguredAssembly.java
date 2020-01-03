@@ -30,9 +30,9 @@ import java.util.Collection;
 
 /**
  * Represents an assembly hierarchy for a given configuration. The collection of
- * parts and subassemblies might change between configurations, or the configurations
- * of each part might change
- * 
+ * parts and subassemblies might change between configurations, or the
+ * configurations of each part might change
+ *
  * @author Peter Harman peter.harman@cae.tech
  */
 public class ConfiguredAssembly extends AbstractDocumentElement {
@@ -150,6 +150,8 @@ public class ConfiguredAssembly extends AbstractDocumentElement {
         private final Collection<SubAssembly> subAssemblies = new ArrayList<>();
         @JsonProperty
         private final Collection<ConfiguredPart> parts = new ArrayList<>();
+        @JsonProperty
+        private String name;
 
         public String getInstanceId() {
             return instanceId;
@@ -173,6 +175,14 @@ public class ConfiguredAssembly extends AbstractDocumentElement {
 
         public Collection<ConfiguredPart> getParts() {
             return parts;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
 
         @Override

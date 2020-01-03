@@ -71,12 +71,16 @@ public class PartsService {
         for (Map property : partMeta.getProperties()) {
             if ("Appearance".equals(property.get("name"))) {
                 Map value = (Map) property.get("value");
-                appearance.setOpacity((Number) value.get("opacity"));
-                Map color = (Map) value.get("color");
-                Number red = (Number) color.get("red");
-                Number green = (Number) color.get("green");
-                Number blue = (Number) color.get("blue");
-                appearance.setColor(new Number[]{red, green, blue});
+                if (value != null) {
+                    appearance.setOpacity((Number) value.get("opacity"));
+                    Map color = (Map) value.get("color");
+                    if (color != null) {
+                        Number red = (Number) color.get("red");
+                        Number green = (Number) color.get("green");
+                        Number blue = (Number) color.get("blue");
+                        appearance.setColor(new Number[]{red, green, blue});
+                    }
+                }
                 return appearance;
             }
         }
