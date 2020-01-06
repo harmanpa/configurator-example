@@ -17,7 +17,7 @@
                             (parameterValueChange)="parameterValueChange($event)"></app-parameter-enum>
       </ng-container>
     </div>
-    <div class="form-row mb-1 mt-2">
+    <div class="form-row mb-1 mt-2" *ngIf="configurator.parameters.length > 0">
       <div class="btn-group w-100">
         <button [disabled]="isDefault || inProgress" class="btn btn-primary w-25" (click)="home()"><fa-icon [icon]="['fas', 'home']"></fa-icon></button>
         <button [disabled]="!changed || inProgress" class="btn btn-primary w-25" (click)="undo()"><fa-icon [icon]="['fas', 'undo']"></fa-icon></button>
@@ -29,7 +29,7 @@
     <app-progress></app-progress>
   </three-toolbar>
   <three-toolbar placement="Right">
-    <!-- meta data -->
+    <app-assembly-tree [assembly]="configuredAssembly"></app-assembly-tree>
   </three-toolbar>
   <three-toolbar placement="Top">
     <app-export-button [documentId]="documentId"

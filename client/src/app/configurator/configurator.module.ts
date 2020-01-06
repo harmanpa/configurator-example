@@ -21,6 +21,10 @@ import { ExportButtonComponent } from './controls/export-button/export-button.co
 import { NgbDropdownModule, NgbTooltipModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { DrawingButtonComponent } from './controls/drawing-button/drawing-button.component';
 import { OnshapeButtonComponent } from './controls/onshape-button/onshape-button.component';
+import { AssemblyTreeComponent } from './controls/assembly-tree/assembly-tree.component';
+import { SubAssemblyTreeComponent } from './controls/assembly-tree/sub-assembly-tree/sub-assembly-tree.component';
+import { PartTreeComponent } from './controls/assembly-tree/part-tree/part-tree.component';
+import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,10 @@ import { OnshapeButtonComponent } from './controls/onshape-button/onshape-button
     ProgressComponent,
     ExportButtonComponent,
     DrawingButtonComponent,
-    OnshapeButtonComponent
+    OnshapeButtonComponent,
+    AssemblyTreeComponent,
+    SubAssemblyTreeComponent,
+    PartTreeComponent
   ],
   exports: [
     ConfiguratorComponent,
@@ -55,7 +62,8 @@ import { OnshapeButtonComponent } from './controls/onshape-button/onshape-button
     FontAwesomeModule,
     NgbDropdownModule,
     NgbTooltipModule,
-    NgbProgressbarModule
+    NgbProgressbarModule,
+    NgbCollapseModule
   ]
 })
 export class ConfiguratorModule {

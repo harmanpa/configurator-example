@@ -1,0 +1,8 @@
+<li class="toc-entry toc-h{{depth}}">
+    <button class="btn btn-link collapsed" type="button" (click)="isCollapsed = !isCollapsed">{{subassembly.name}}</button>
+    <ul  [ngbCollapse]="isCollapsed">
+        <app-sub-assembly-tree [subassembly]="subsubassembly" [depth]="depth+1"
+                               *ngFor="let subsubassembly of subassembly.subAssemblies; trackBy: trackElement"></app-sub-assembly-tree>
+        <app-part-tree [part]="part" [depth]="depth+1" *ngFor="let part of subassembly.parts; trackBy: trackElement"></app-part-tree>
+    </ul>
+</li>

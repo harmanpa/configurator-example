@@ -1,0 +1,22 @@
+//
+//.bd-toc {
+//  @supports (position: sticky) {
+//    position: sticky;
+//    top: 4rem;
+//    height: calc(100vh - 4rem);
+//    overflow-y: auto;
+//  }
+//  order: 2;
+//  padding-top: 1.5rem;
+//  padding-bottom: 1.5rem;
+//  @include font-size(.875rem);
+//}
+
+.section-nav {
+  padding-left: 0;
+  border-left: 1px solid #eee;
+  overflow-y: scroll;
+  ul {
+    padding-left: 1rem;
+  }
+}

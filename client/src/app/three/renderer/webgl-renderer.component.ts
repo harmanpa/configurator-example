@@ -132,6 +132,7 @@ export class WebGLRendererComponent implements AfterViewInit, AfterContentInit {
             antialias: true
         });
         this.renderer.setPixelRatio(devicePixelRatio);
+        this.renderer.setClearAlpha(0);
         this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
 
         this.renderer.shadowMap.enabled = true;

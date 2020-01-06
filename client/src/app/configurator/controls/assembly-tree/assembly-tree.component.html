@@ -1,0 +1,5 @@
+<ul class="section-nav">
+    <app-sub-assembly-tree [subassembly]="subassembly" [depth]="2"
+                           *ngFor="let subassembly of assembly.subAssemblies; trackBy: trackElement"></app-sub-assembly-tree>
+    <app-part-tree [part]="part" [depth]="2" *ngFor="let part of assembly.parts; trackBy: trackElement"></app-part-tree>
+</ul>

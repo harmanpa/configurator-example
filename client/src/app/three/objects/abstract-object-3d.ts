@@ -189,6 +189,41 @@ export abstract class AbstractObject3D<T extends THREE.Object3D> implements Afte
         return null;
     }
 
+    public findByPath(path: string[]): AbstractObject3D<THREE.Object3D> {
+        if (path && path.length > 0) {
+            if (this.id() && this.id().length > 0) {
+                if (this.id() === path[0]) {
+                    if (path.length > 1) {
+                        const subPath = path.slice(1);
+                        let childResult = null;
+                        this.childNodes.forEach((child) => {
+                            if (!childResult) {
+                                childResult = child.findByPath(subPath);
+                            }
+                        });
+                        if (childResult) {
+                            return childResult;
+                        }
+                    } else {
+                        return this;
+                    }
+                }
+            } else {
+                // This applies to Scene or Assembly components, where the components with an id are below
+                let childResult = null;
+                this.childNodes.forEach((child) => {
+                    if (!childResult) {
+                        childResult = child.findByPath(path);
+                    }
+                });
+                if (childResult) {
+                    return childResult;
+                }
+            }
+        }
+        return null;
+    }
+
     protected applyMatrix(): void {
         if (!this.matrix) {
             return;

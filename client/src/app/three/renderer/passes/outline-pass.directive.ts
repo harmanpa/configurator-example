@@ -18,8 +18,9 @@ export class OutlinePassDirective extends AbstractPass<OutlinePass> {
     }
 
     setup(renderer: WebGLRendererComponent): OutlinePass {
-        this.outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), renderer.getScene(), renderer.getCamera());
-       // this.outlinePass.visibleEdgeColor = new THREE.Color(1,0,0);
+        this.outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight),
+            renderer.getScene(), renderer.getCamera());
+        // this.outlinePass.visibleEdgeColor = new THREE.Color(1,0,0);
 //        this.outlinePass = new OutlinePass(renderer.getSize(), renderer.getScene(), renderer.getCamera());
         renderer.hoverChange.subscribe((hovered: AbstractObject3D<THREE.Object3D>[]) => {
             this.outlinePass.selectedObjects = hovered.map((component) => component.getObject());

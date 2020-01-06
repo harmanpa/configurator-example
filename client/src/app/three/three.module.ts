@@ -51,6 +51,7 @@ import {DirectionalLightDirective} from './objects/light/directional-light.direc
 import {CameraHelperDirective} from './objects/helpers/camera-helper.directive';
 import { OutlinePassDirective } from './renderer/passes/outline-pass.directive';
 import { FxaaPassDirective } from './renderer/passes/fxaa-pass.directive';
+import { TransformerPassDirective } from './renderer/passes/transformer-pass.directive';
 
 @NgModule({
   imports: [
@@ -80,7 +81,8 @@ import { FxaaPassDirective } from './renderer/passes/fxaa-pass.directive';
     PlanemeshDirective,
     EmptyDirective,
     OutlinePassDirective,
-    FxaaPassDirective
+    FxaaPassDirective,
+    TransformerPassDirective
   ],
     exports: [
         OrbitControlsDirective,

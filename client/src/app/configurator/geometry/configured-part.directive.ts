@@ -20,6 +20,10 @@ export class ConfiguredPartDirective extends AbstractObject3D<THREE.Object3D> im
         super();
     }
 
+    id(): string {
+        return this.part.instanceId;
+    }
+
     protected afterInit(): void {
         this.matrix = this.part.transform;
         this.transposeMatrix = false;
