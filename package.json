@@ -5,6 +5,7 @@
     "postinstall": "npm install client"
   },
   "dependencies": {
+    "node": "^13.5.0",
     "onshape-configurator": "file:client"
   }
 }

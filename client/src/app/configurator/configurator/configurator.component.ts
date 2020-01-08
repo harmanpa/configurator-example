@@ -11,6 +11,7 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./configurator.component.scss']
 })
 export class ConfiguratorComponent implements OnInit, OnChanges {
+  showFiller = false;
 
   @Input() documentId: string;
   @Input() wvmType: WVM;

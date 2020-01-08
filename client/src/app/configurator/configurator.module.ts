@@ -25,6 +25,14 @@ import { AssemblyTreeComponent } from './controls/assembly-tree/assembly-tree.co
 import { SubAssemblyTreeComponent } from './controls/assembly-tree/sub-assembly-tree/sub-assembly-tree.component';
 import { PartTreeComponent } from './controls/assembly-tree/part-tree/part-tree.component';
 import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
+import {
+    MatButtonModule, MatCheckboxModule,
+    MatFormFieldModule, MatIconModule, MatListModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatSidenavModule, MatToolbarModule
+} from "@angular/material";
+import {SidebarModule} from "ng-sidebar";
 
 @NgModule({
   declarations: [
@@ -50,21 +58,31 @@ import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
     ParameterEnumComponent,
     ParameterQuantityComponent
   ],
-  imports: [
-    CommonModule,
-    ThreeToolsModule,
-    ThreeModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgSelectModule,
-    Ng5SliderModule,
-    FontAwesomeModule,
-    NgbDropdownModule,
-    NgbTooltipModule,
-    NgbProgressbarModule,
-    NgbCollapseModule
-  ]
+    imports: [
+        CommonModule,
+        ThreeToolsModule,
+        ThreeModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgSelectModule,
+        Ng5SliderModule,
+        FontAwesomeModule,
+        NgbDropdownModule,
+        NgbTooltipModule,
+        NgbProgressbarModule,
+        NgbCollapseModule,
+        MatSidenavModule,
+        MatFormFieldModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatCheckboxModule,
+        MatListModule,
+        MatIconModule,
+        SidebarModule
+    ]
 })
 export class ConfiguratorModule {
   constructor() {

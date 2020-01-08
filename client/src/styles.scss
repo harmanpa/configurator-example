@@ -10,4 +10,9 @@ $fa-font-path : '~font-awesome/fonts';
 @import '~bootstrap/scss/bootstrap-grid';
 
 @import "~@ng-select/ng-select/themes/default.theme.css";
+//@import '../../node_modules/@syncfusion/ej2-base/styles/material.css';
+//@import '../../node_modules/@syncfusion/ej2-angular-navigations/styles/material.css';
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
