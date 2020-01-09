@@ -8,6 +8,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { MatSliderModule } from '@angular/material/slider';
 import { SidebarModule } from 'ng-sidebar';
+import {MatButtonModule} from '@angular/material/button';
 
 //
 import { AppComponent } from './app.component';
@@ -34,7 +35,8 @@ import { AngularMaterialModule } from './material-module';
     MatSliderModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
-    SidebarModule
+    SidebarModule,
+      MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
